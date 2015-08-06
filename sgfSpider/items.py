@@ -9,12 +9,14 @@ last_date = ''
 
 class IgokisenNewsItem(Item):
     date   = Field()
+    nation = Field()
     game   = Field()
     link   = Field()
 
     def parse(self, row):
         global last_date
         self['date']   = last_date = self.rowDate(row)
+        self['nation'] = self.rowNation(row)
         self['game']   = self.rowGame(row)
         self['link']   = self.rowLink(row)
         return self
@@ -22,6 +24,9 @@ class IgokisenNewsItem(Item):
     def rowDate(self, row):
         str = self.pluck(row, 'td/text()')
         return str if re.match('\d\d-\d\d', str) else last_date
+
+    def rowNation(self, row):
+        return self.pluck(row, 'td/span/text()')
 
     def rowLink(self, row):
         return self.pluck(row, 'td/a/@href')
