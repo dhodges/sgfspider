@@ -1,2 +1,5 @@
-*.pyc
-*.json
+.DS_Store
+**/*.pyc
+
+sgfSpider.egg-info
+items.json
