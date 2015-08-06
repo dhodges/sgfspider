@@ -7,9 +7,11 @@ idna==2.0
 ipaddress==1.0.14
 ipython==3.2.1
 lxml==3.4.4
+py==1.4.30
 pyasn1==0.1.8
 pycparser==2.14
 pyOpenSSL==0.15.1
+pytest==2.7.2
 queuelib==1.2.2
 Scrapy==1.0.1
 six==1.9.0
