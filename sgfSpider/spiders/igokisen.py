@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import scrapy
+from sgfSpider.dbsgf import DBsgf
 from sgfSpider.items import IgokisenNewsItem
 
 class IgokisenSpider(scrapy.Spider):
@@ -11,9 +12,12 @@ class IgokisenSpider(scrapy.Spider):
   ]
 
   def parse(self, response):
+    db = DBsgf()
     this_year = self.get_year(response)
     for selection in response.xpath('//table[2]//tr')[1:]:
-      yield IgokisenNewsItem(this_year).parse(selection)
+      item = IgokisenNewsItem(this_year).parse(selection)
+      db.addNewsItem(item)
+      yield item
 
   def get_year(self, response):
     year = response.css('table.right td.title-sub b')
