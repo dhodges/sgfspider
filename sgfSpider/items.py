@@ -1,34 +1,34 @@
 # -*- coding: utf-8 -*-
 
-# Define here the models for your scraped items
-#
-# See documentation in:
-# http://doc.scrapy.org/en/latest/topics/items.html
+# see: http://doc.scrapy.org/en/latest/topics/items.html
 
 import re
 from scrapy import Item, Field
 
-class SgfSpiderItem(Item):
+last_date = ''
+
+class IgokisenNewsItem(Item):
     date = Field()
     game = Field()
     link = Field()
 
     def parse(self, row):
-        self['date'] = self.rowDate(row)
+        global last_date
+        self['date'] = last_date = self.rowDate(row)
         self['game'] = self.rowGame(row)
         self['link'] = self.rowLink(row)
         return self
 
     def rowDate(self, row):
-        str  = row.xpath('td/text()') or ''
-        str  = str[0].extract() if len(str) else ''
-        return str if re.match('\d\d-\d\d', str) else ''
+        str = self.pluck(row, 'td/text()')
+        return str if re.match('\d\d-\d\d', str) else last_date
 
     def rowLink(self, row):
-        sgf = row.xpath('td/a/@href').extract()
-        return sgf[0] if len(sgf) else ''
+        return self.pluck(row, 'td/a/@href')
 
     def rowGame(self, row):
-        text = row.xpath('td/a/text()')
-        return text.extract()[0] if len(text) else ''
+        return self.pluck(row, 'td/a/text()')
 
+    def pluck(self, row, selector):
+        text = row.xpath(selector).extract()
+        return text[0] if len(text) else ''
