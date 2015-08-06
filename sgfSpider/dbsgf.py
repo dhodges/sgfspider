@@ -13,6 +13,7 @@ class DBNewsItem(Base):
   __tablename__ = 'tournament_news_items'
   id     = Column(Integer, Sequence('tournament_news_item_id_seq'), primary_key=True)
   date   = Column(Date)
+  site   = Column(String)
   game   = Column(String)
   nation = Column(String)
   link   = Column(String)
@@ -37,6 +38,6 @@ class DBsgf():
     self.session.new
     results = self.session.query(DBNewsItem).filter_by(date=item['date'], game=item['game']).all()
     if len(results) < 1:
-      newsItem = DBNewsItem(date=item['date'], game=item['game'], nation=item['nation'], link=item['link'])
+      newsItem = DBNewsItem(date=item['date'], site=item['site'], game=item['game'], nation=item['nation'], link=item['link'])
       self.session.add(newsItem)
       self.session.commit()

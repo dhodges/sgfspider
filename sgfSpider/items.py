@@ -10,6 +10,7 @@ this_year = ''
 
 class IgokisenNewsItem(Item):
     date   = Field()
+    site   = Field()
     nation = Field()
     game   = Field()
     link   = Field()
@@ -22,6 +23,7 @@ class IgokisenNewsItem(Item):
     def parse(self, row):
         global last_date
         self['date']   = last_date = self.rowDate(row)
+        self['site']   = 'igokisen'
         self['nation'] = self.rowNation(row)
         self['game']   = self.rowGame(row)
         self['link']   = self.rowLink(row)
