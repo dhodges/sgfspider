@@ -49,7 +49,7 @@ class TestIgokisenSpider(unittest.TestCase):
     self.assertEqual(self.results.__sizeof__(), 48)
     item = self.results.next()
     self.assertEqual(item['game'],   'Gosei')
-    self.assertEqual(item['date'],   '07-27')
+    self.assertEqual(item['date'],   '2015-07-27')
     self.assertEqual(item['nation'], 'Japan')
     self.assertEqual(item['link'],   'file:///var/folders/08/1yh0yp1955z8rg6jdhrps2vw0000gn/T/jp/gosei.html')
 

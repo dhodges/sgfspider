@@ -6,12 +6,18 @@ import re
 from scrapy import Item, Field
 
 last_date = ''
+this_year = ''
 
 class IgokisenNewsItem(Item):
     date   = Field()
     nation = Field()
     game   = Field()
     link   = Field()
+
+    def __init__(self, year):
+        global this_year
+        this_year = year
+        Item.__init__(self)
 
     def parse(self, row):
         global last_date
@@ -22,8 +28,12 @@ class IgokisenNewsItem(Item):
         return self
 
     def rowDate(self, row):
+        global this_year
         str = self.pluck(row, 'td/text()')
-        return str if re.match('\d\d-\d\d', str) else last_date
+        if re.match('\d\d-\d\d', str):
+            return '%s-%s' % (this_year, str)
+        else:
+            return last_date
 
     def rowNation(self, row):
         return self.pluck(row, 'td/span/text()')
