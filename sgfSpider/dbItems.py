@@ -22,7 +22,10 @@ class TournamentNewsItem(Base):
     return "<TournamentNewsItem(date='%s', nation='%s', name='%s')>" % (
       self.date, self.nation, self.name)
 
-engine = create_engine('sqlite:///:memory:', echo=True)
+engine = create_engine(
+    "postgresql+psycopg2://david@localhost/sgfspider",
+    isolation_level="READ UNCOMMITTED"
+)
 Base.metadata.create_all(engine)
 
 def update_tournament_news():
