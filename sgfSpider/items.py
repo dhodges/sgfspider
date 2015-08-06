@@ -8,15 +8,15 @@ from scrapy import Item, Field
 last_date = ''
 
 class IgokisenNewsItem(Item):
-    date = Field()
-    game = Field()
-    link = Field()
+    date   = Field()
+    game   = Field()
+    link   = Field()
 
     def parse(self, row):
         global last_date
-        self['date'] = last_date = self.rowDate(row)
-        self['game'] = self.rowGame(row)
-        self['link'] = self.rowLink(row)
+        self['date']   = last_date = self.rowDate(row)
+        self['game']   = self.rowGame(row)
+        self['link']   = self.rowLink(row)
         return self
 
     def rowDate(self, row):

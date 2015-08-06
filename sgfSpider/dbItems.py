@@ -31,7 +31,7 @@ def update_tournament_news():
   session.new
 
   results = session.query(TournamentNewsItem).filter_by(date=date, name=name)
-  if results.lengh < 1:
+  if results.length < 1:
     newsItem = TournamentNewsItem(date=date, name=name, nation=nation, link=link)
     session.add(newsItem)
     session.commit()
