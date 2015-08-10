@@ -17,9 +17,8 @@ pyOpenSSL==0.15.1
 pytest==2.7.2
 python-termstyle==0.1.10
 queuelib==1.2.2
+redgreen==0.0.9
 Scrapy==1.0.1
-## !! Could not determine repository location
-sgfSpider==0.1
 six==1.9.0
 SQLAlchemy==1.0.8
 Twisted==15.2.1
