@@ -1,59 +1,56 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# based upon:
-# http://stackoverflow.com/questions/6456304/scrapy-unit-testing
-
+import os
 import pdb
 import unittest
 
-from os.path import dirname
-from os.path import realpath
-from os.path import join
+from os.path  import join, dirname
+from datetime import date
+
+from testing_utils     import setupTestDB, fake_response_from_file
 
 from scrapy.http       import Response, Request, HtmlResponse
-from sgfSpider.items   import IgokisenNewsItem
+from sgfSpider.dbsgf   import DBsgf, DBNewsItem
+
 from sgfSpider.spiders.igokisen import IgokisenSpider
 
 
-def fixture(file_name):
-  if not file_name[0] == '/':
-      root_dir  = dirname(realpath(__file__))
-      file_name = join(root_dir, 'fixtures/responses', file_name)
-  return open(file_name, 'r').read()
-
-def fake_response_from_file(file_name, url='http://www.example.com'):
-    """
-    Create a Scrapy fake HTTP response from an HTML file
-    @param file_name: The relative filename from the responses directory,
-                      but absolute paths are also accepted.
-    @param url: The URL of the response.
-    returns: A scrapy HTTP response which can be used for unittesting.
-    """
-    response = HtmlResponse(
-        url     = url,
-        request = Request(url=url),
-        body    = fixture(file_name),
-        encoding = 'utf-8'
-    )
-    return response
-
-
 class TestIgokisenSpider(unittest.TestCase):
-
   def setUp(self):
-    self.spider  = IgokisenSpider()
-    self.results = self.spider.parse(fake_response_from_file('Go_Topics.html'))
+    setupTestDB()
+    self.spider = IgokisenSpider()
 
-  def testIgokisenSpider(self):
-    self.assertEqual(self.results.__sizeof__(), 48)
-    item = self.results.next()
-    self.assertEqual(item['game'],   'Gosei')
-    self.assertEqual(item['date'],   '2015-07-27')
-    self.assertEqual(item['site'],   'igokisen')
-    self.assertEqual(item['nation'], 'Japan')
-    self.assertEqual(item['link'],   'file:///var/folders/08/1yh0yp1955z8rg6jdhrps2vw0000gn/T/jp/gosei.html')
+  def testIgokisenNewsParsing(self):
+    results = self.spider.parse(fake_response_from_file('Go_Topics.html'))
+    # there should be 48 items
+    for x in range(48):
+      results.next()
 
+    dbitems = DBsgf().session.query(DBNewsItem).order_by(DBNewsItem.date).all()
+    self.assertEqual(len(dbitems), 48)
+
+    item = dbitems[7]
+    self.assertEqual(item.date.strftime('%Y-%m-%d'), '2015-04-02')
+    self.assertEqual(item.game,  'GS Caltex Cup')
+    self.assertEqual(item.link,  'file:///var/folders/08/1yh0yp1955z8rg6jdhrps2vw0000gn/T/kr/gs.html')
+    self.assertEqual(item.nation,'Korea')
+    self.assertEqual(item.site,  'igokisen')
+
+  def testIgokisenGameParsing(self):
+    results = self.spider.parseTournamentGames(fake_response_from_file('Gosei.html'))
+    urls = []
+    # there should be 4 items
+    urls.extend(results.next()['file_urls'])
+    urls.extend(results.next()['file_urls'])
+    urls.extend(results.next()['file_urls'])
+    urls.extend(results.next()['file_urls'])
+    self.assertEqual(sorted(urls), [
+      u'http://igokisen.web.fc2.com/jp/sgf/40goseit1.sgf',
+      u'http://igokisen.web.fc2.com/jp/sgf/40goseit2.sgf',
+      u'http://igokisen.web.fc2.com/jp/sgf/40goseit3.sgf',
+      u'http://igokisen.web.fc2.com/jp/sgf/40goseit4.sgf'
+    ])
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import pdb
 import scrapy
 from sgfSpider.dbsgf import DBsgf
 from sgfSpider.items import IgokisenGameItem
