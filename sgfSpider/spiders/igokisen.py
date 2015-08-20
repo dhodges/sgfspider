@@ -4,6 +4,12 @@ import scrapy
 from sgfSpider.dbsgf import DBsgf
 from sgfSpider.items import IgokisenNewsItem
 
+from os.path import join, dirname
+from dotenv  import load_dotenv
+
+load_dotenv(join(dirname(__file__), '../../.env'))
+
+
 class IgokisenSpider(scrapy.Spider):
   name = "igokisen"
   allowed_domains = ["igokisen.web.fc2.com"]

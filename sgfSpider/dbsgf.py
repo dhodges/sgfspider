@@ -29,7 +29,7 @@ class DBsgf():
 
   def setupEngine(self):
     self.engine = create_engine(
-        "postgresql+psycopg2://david@localhost/sgfspider",
+        os.environ['DB_URL'],
         isolation_level="READ UNCOMMITTED"
     )
     Base.metadata.create_all(self.engine)

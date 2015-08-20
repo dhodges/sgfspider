@@ -1,5 +1,6 @@
 .DS_Store
 **/*.pyc
 
+.env
 sgfSpider.egg-info
 items.json
