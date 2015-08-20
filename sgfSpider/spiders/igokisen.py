@@ -2,6 +2,7 @@
 
 import scrapy
 from sgfSpider.dbsgf import DBsgf
+from sgfSpider.items import IgokisenGameItem
 from sgfSpider.items import IgokisenNewsItem
 
 from os.path import join, dirname
@@ -22,7 +23,17 @@ class IgokisenSpider(scrapy.Spider):
     this_year = self.get_year(response)
     for selection in response.xpath('//table[2]//tr')[1:]:
       item = IgokisenNewsItem(this_year).parse(selection)
-      db.addNewsItem(item)
+      if not db.exists(item):
+        db.add(item)
+        url = response.urljoin(item['link'])
+        yield scrapy.Request(url, callback=self.parseTournamentGames)
+
+  # see: http://doc.scrapy.org/en/latest/intro/tutorial.html#following-links
+  def parseTournamentGames(self, response):
+    for link in response.xpath('//table[1]//a/@href').extract():
+      item = IgokisenGameItem()
+      item['link'] = link
+      item['file_urls'] = [response.urljoin(link)]
       yield item
 
   def get_year(self, response):

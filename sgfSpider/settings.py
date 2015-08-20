@@ -64,6 +64,8 @@ NEWSPIDER_MODULE = 'sgfSpider.spiders'
 #ITEM_PIPELINES = {
 #    'sgfSpider.pipelines.SomePipeline': 300,
 #}
+ITEM_PIPELINES = {'scrapy.pipelines.files.FilesPipeline': 1}
+FILES_STORE = '/Users/david/Downloads'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
