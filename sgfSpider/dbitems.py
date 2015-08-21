@@ -28,7 +28,7 @@ class DBNewsItem(Base):
 class DBGameItem(Base):
   __tablename__ = 'tournament_games'
   id          = Column(Integer, Sequence('tournament_games_id_seq'), primary_key=True)
-  date        = Column(Date)
+  date        = Column(String)
   link        = Column(String)
   sgf         = Column(String)
   event       = Column(String)
