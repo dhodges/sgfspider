@@ -22,7 +22,7 @@ class IgokisenGameItem(Item):
     def queryFields(self):
         return self.toDict(fields=('date', 'tournament', 'event', 'playerBlack', 'playerWhite'))
 
-    def toDict(self, fields=('date', 'link', 'sgf', 'tournament', 'playerBlack', 'playerWhite', 'result')):
+    def toDict(self, fields=('date', 'sgf', 'tournament', 'playerBlack', 'playerWhite', 'result')):
         return {k: self[k] for k in fields}
 
 class IgokisenNewsItem(Item):
