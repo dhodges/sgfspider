@@ -5,7 +5,6 @@ import os
 import pdb
 import unittest
 
-from os.path  import join, dirname
 from datetime import date
 
 from testing_utils     import setupTestDB, fake_response_from_file

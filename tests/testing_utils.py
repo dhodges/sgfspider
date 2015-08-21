@@ -23,12 +23,15 @@ def setupEnviron():
   load_dotenv(dot_env_file)
   if not 'DB_URL' in os.environ.keys():
     raise Exception("os.environ['DB_URL'] undefined")
+
+def setupTestEnviron():
+  setupEnviron()
   if not os.environ['DB_URL'].endswith('_test'):
     os.environ['DB_URL'] = os.environ['DB_URL'] + '_test'
 
 
 def setupTestDB():
-  setupEnviron()
+  setupTestEnviron()
   db = DBsgf()
   db._deleteAllTables()
 
