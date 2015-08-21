@@ -63,7 +63,7 @@ class DBsgf():
     Base.metadata.create_all(self.engine)
 
   def _deleteAllTables(self):
-    print('deleting all items in db: %s' % os.environ['DB_URL'])
+    logging.warning('deleting all items in db: %s' % os.environ['DB_URL'])
     conn = self.engine.connect()
     conn.execute(table(DBGameItem.__tablename__).delete())
     conn.execute(table(DBNewsItem.__tablename__).delete())

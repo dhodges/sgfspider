@@ -1,3 +1,4 @@
 #!/bin/sh 
 
-scrapy crawl igokisen -t json -o items.json
+scrapy crawl igokisen -t json -o items.json --loglevel WARNING
+
