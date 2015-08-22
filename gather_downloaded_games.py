@@ -43,7 +43,7 @@ def game_item(f, info):
   item = IgokisenGameItem()
   item['date']        = info['Date']
   item['result']      = info['Result']
-  item['tournament']  = info['Event']
+  item['event']       = info['Event']
   item['playerBlack'] = info['PlayerBlackName']
   item['playerWhite'] = info['PlayerWhiteName']
   item['sgf'] = ''.join(open(f, 'r').readlines()).strip()

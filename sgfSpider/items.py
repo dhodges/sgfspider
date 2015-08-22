@@ -12,7 +12,7 @@ class IgokisenGameItem(Item):
     date        = Field()
     link        = Field()
     sgf         = Field()
-    tournament  = Field()
+    event       = Field()
     playerBlack = Field()
     playerWhite = Field()
     result      = Field()
@@ -20,9 +20,9 @@ class IgokisenGameItem(Item):
     files       = Field() # as used by the scrapy media pipeline
 
     def queryFields(self):
-        return self.toDict(fields=('date', 'tournament', 'event', 'playerBlack', 'playerWhite'))
+        return self.toDict(fields=('date', 'event', 'playerBlack', 'playerWhite'))
 
-    def toDict(self, fields=('date', 'sgf', 'tournament', 'playerBlack', 'playerWhite', 'result')):
+    def toDict(self, fields=('date', 'sgf', 'event', 'playerBlack', 'playerWhite', 'result')):
         return {k: self[k] for k in fields}
 
 class IgokisenNewsItem(Item):

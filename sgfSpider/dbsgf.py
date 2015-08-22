@@ -41,14 +41,14 @@ class DBGameItem(Base):
   link        = Column(String)
   sgf         = Column(String)
   event       = Column(String)
-  tournament  = Column(String)
+  event       = Column(String)
   playerBlack = Column(String)
   playerWhite = Column(String)
   result      = Column(String)
 
   def __repr__(self):
-    return "<TournamentGameItem(date='%s', tournament='%s', event='%s', playerBlack='%s', playerWhite='%s', result='%s')>" % (
-      self.date, self.tournament, self.event, self.playerBlack, self.playerWhite, self.result)
+    return "<TournamentGameItem(date='%s', event='%s', playerBlack='%s', playerWhite='%s', result='%s')>" % (
+      self.date, self.event, self.playerBlack, self.playerWhite, self.result)
 
 
 
