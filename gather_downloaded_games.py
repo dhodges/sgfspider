@@ -51,6 +51,7 @@ def game_item(f, info):
 
 def gather_games():
   db  = DBsgf()
+  num = 0
   for f, info in downloaded_sgf_files():
     try:
       db.add(game_item(f, info))
@@ -59,6 +60,7 @@ def gather_games():
     except Exception as err:
       print("error while loading file: '%s':" % f)
       print(err.message)
+  print("%d new files added" % num)
 
 if __name__ == '__main__':
   setupEnviron()
