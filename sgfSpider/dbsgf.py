@@ -92,7 +92,10 @@ class DBsgf():
   def add(self, item):
     self.session.new
     dbClass = self._dbClass(item)
-    dbItem = dbClass(**item.toDict())
-    self.session.add(dbItem)
-    self.session.commit()
-
+    dbItem  = dbClass(**item.toDict())
+    try:
+      self.session.add(dbItem)
+      self.session.commit()
+    except Exception as err:
+      self.session.rollback()
+      raise err
