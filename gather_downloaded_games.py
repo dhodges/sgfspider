@@ -44,8 +44,8 @@ def game_item(f, info):
   item['date']        = info['Date']
   item['result']      = info['Result']
   item['tournament']  = info['Event']
-  item['playerBlack'] = info['BlackPlayerName']
-  item['playerWhite'] = info['WhitePlayerName']
+  item['playerBlack'] = info['PlayerBlackName']
+  item['playerWhite'] = info['PlayerWhiteName']
   item['sgf'] = ''.join(open(f, 'r').readlines()).strip()
   return item
 
