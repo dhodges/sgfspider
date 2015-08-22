@@ -50,7 +50,7 @@ def game_item(f, info):
   return item
 
 def gather_games():
-  db = DBsgf()
+  db  = DBsgf()
   for f, info in downloaded_sgf_files():
     db.add(game_item(f, info))
 
@@ -59,7 +59,3 @@ if __name__ == '__main__':
   setupEnviron()
   check_args()
   gather_games()
-
-
-get_project_settings()['FILES_STORE']
-
