@@ -18,6 +18,9 @@ from tests.testing_utils  import setupEnviron
 
 FILES_STORE = join(get_project_settings()['FILES_STORE'], 'full')
 
+# TODO: archive problem game files
+# TODO: catch (and filter?) char encoding errors
+
 
 def progname():
   return argv[0].split('/')[-1:][0]
