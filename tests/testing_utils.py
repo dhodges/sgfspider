@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import os
 import pdb
 import contextlib
@@ -67,5 +64,3 @@ def fake_response_from_file(file_name, url='http://www.example.com'):
         encoding = 'utf-8'
     )
     return response
-
-

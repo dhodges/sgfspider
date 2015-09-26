@@ -30,10 +30,9 @@ def usage_and_exit():
   exit(1)
 
 def check_args():
-  # TODO: check for (external) install of 'sgfinfo'
+  # TODO: verify `sgfinfo' is installed - raise an error if missing
   if not len(argv) == 1:
     usage_and_exit()
-
 
 def downloaded_sgf_files():
   for f in os.listdir(FILES_STORE):

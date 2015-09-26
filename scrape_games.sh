@@ -1,4 +1,6 @@
-#!/bin/sh 
+#!/bin/sh
+
+# TODO: http://doc.scrapy.org/en/latest/topics/practices.html#run-from-script
 
 echo 'searching games on http://igokisen.web.fc2.com...'
 
@@ -10,4 +12,4 @@ echo
 echo "$NUMFILES new file(s) found"
 echo
 
-# TODO: http://doc.scrapy.org/en/latest/topics/practices.html#run-from-script
+./gather_downloaded_games.py
