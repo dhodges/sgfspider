@@ -1,0 +1,4 @@
+
+* To-Dos
+** TODO add index for black & white playernames
+** TODO add date field (i.e, first day of the game)
