@@ -42,13 +42,13 @@ class DBGameItem(Base):
   sgf         = Column(String)
   event       = Column(String)
   event       = Column(String)
-  playerBlack = Column(String)
-  playerWhite = Column(String)
   result      = Column(String)
+  player_black = Column(String)
+  player_white = Column(String)
 
   def __repr__(self):
-    return "<TournamentGameItem(date='%s', event='%s', playerBlack='%s', playerWhite='%s', result='%s')>" % (
-      self.date, self.event, self.playerBlack, self.playerWhite, self.result)
+    return "<TournamentGameItem(date='%s', event='%s', player_black='%s', player_white='%s', result='%s')>" % (
+      self.date, self.event, self.player_black, self.player_white, self.result)
 
 
 
