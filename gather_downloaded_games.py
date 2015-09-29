@@ -43,9 +43,9 @@ def downloaded_sgf_files():
 
 def game_item(f, info):
   item = IgokisenGameItem()
-  item['date']        = info['Date']
-  item['result']      = info['Result']
-  item['event']       = info['Event']
+  item['date']         = info['Date']
+  item['result']       = info['Result']
+  item['event']        = info['Event']
   item['player_black'] = info['PlayerBlackName']
   item['player_white'] = info['PlayerWhiteName']
   item['sgf'] = ''.join(open(f, 'r').readlines()).strip()

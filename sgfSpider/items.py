@@ -9,15 +9,15 @@ last_date = ''
 this_year = ''
 
 class IgokisenGameItem(Item):
-    date        = Field()
-    link        = Field()
-    sgf         = Field()
-    event       = Field()
-    result      = Field()
-    file_urls   = Field() # for downloaded sgf game file(s)
-    files       = Field() # as used by the scrapy media pipeline
+    date         = Field()
+    link         = Field()
+    sgf          = Field()
+    event        = Field()
     player_black = Field()
     player_white = Field()
+    result       = Field()
+    file_urls    = Field() # for downloaded sgf game file(s)
+    files        = Field() # as used by the scrapy media pipeline
 
     def queryFields(self):
         return self.toDict(fields=('date', 'event', 'player_black', 'player_white'))

@@ -36,15 +36,15 @@ class DBNewsItem(Base):
 
 class DBGameItem(Base):
   __tablename__ = 'tournament_games'
-  id          = Column(Integer, Sequence('tournament_games_id_seq'), primary_key=True)
-  date        = Column(String)
-  link        = Column(String)
-  sgf         = Column(String)
-  event       = Column(String)
-  event       = Column(String)
-  result      = Column(String)
+  id           = Column(Integer, Sequence('tournament_games_id_seq'), primary_key=True)
+  date         = Column(String)
+  link         = Column(String)
+  sgf          = Column(String)
+  event        = Column(String)
+  event        = Column(String)
   player_black = Column(String)
   player_white = Column(String)
+  result       = Column(String)
 
   def __repr__(self):
     return "<TournamentGameItem(date='%s', event='%s', player_black='%s', player_white='%s', result='%s')>" % (
