@@ -30,6 +30,13 @@ def check_args():
   if not len(argv) == 1:
     usage_and_exit()
 
+def verify_sgfinfo():
+  try:
+    subprocess.check_output(['which', 'sgfinfo'])
+  except Exception:
+    print("error: `sgfinfo' is not installed")
+    exit(1)
+
 def downloaded_sgf_files():
   for f in os.listdir(FILES_STORE):
     sgf_file = join(FILES_STORE, f)
@@ -63,4 +70,5 @@ def gather_games():
 if __name__ == '__main__':
   setupEnviron()
   check_args()
+  verify_sgfinfo()
   gather_games()
