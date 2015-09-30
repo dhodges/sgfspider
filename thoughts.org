@@ -1,6 +1,5 @@
 
 * To-Dos
-** TODO verify `sgfinfo' is installed - raise an error if missing
 ** TODO add index for black & white playernames
 ** TODO add date field (i.e, first day of the game)
 ** TODO raise exception when missing .env
