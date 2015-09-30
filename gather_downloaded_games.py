@@ -8,6 +8,7 @@ import subprocess
 from sys      import argv, exit
 from dotenv   import load_dotenv
 from os.path  import join, dirname
+from datetime import datetime
 
 from sgfSpider.items      import IgokisenGameItem
 from sgfSpider.dbsgf      import DBsgf
@@ -44,9 +45,14 @@ def downloaded_sgf_files():
     sgf_info = json.loads(sgf_info)
     yield (sgf_file, sgf_info)
 
+def first_date(datestr):
+  """`datestr' may be a date range - extract the first date"""
+  datestr = datestr.split(',')[0]
+  return datetime.strptime(datestr, '%Y-%m-%d').date()
+
 def game_item(f, info):
   item = IgokisenGameItem()
-  item['date']         = info['Date']
+  item['date']         = first_date(info['Date'])
   item['result']       = info['Result']
   item['event']        = info['Event']
   item['player_black'] = info['PlayerBlackName']

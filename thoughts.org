@@ -1,7 +1,6 @@
 
 * To-Dos
 ** TODO add index for black & white playernames
-** TODO add date field (i.e, first day of the game)
 ** TODO raise exception when missing .env
 ** TODO archive problem game files
 ** TODO catch (and filter?) char encoding errors
