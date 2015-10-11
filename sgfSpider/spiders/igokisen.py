@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 import pdb
 import scrapy
 from sgfSpider.dbsgf import DBsgf
@@ -22,7 +23,12 @@ class IgokisenSpider(scrapy.Spider):
   def parse(self, response):
     db = DBsgf()
     this_year = self.get_year(response)
-    for selection in response.xpath('//table[2]//tr')[1:]:
+
+    # all tournament links:
+    # response.xpath('//tbody//a/@href').extract()
+    #
+
+    for selection in response.xpath('//tbody//tr')[1:]:
       item = IgokisenNewsItem(this_year).parse(selection)
       if not db.exists(item):
         db.add(item)
@@ -38,8 +44,8 @@ class IgokisenSpider(scrapy.Spider):
       yield item
 
   def get_year(self, response):
-    year = response.css('table.right td.title-sub b')
+    year = response.css('div.right span.title-sub')
     year = year.extract()[0] if len(year) else ''
-    year = year.replace('<b>from ', '')
+    year = re.sub(r'.*>from ', '', year)
     year = year[0:4]
     return year
