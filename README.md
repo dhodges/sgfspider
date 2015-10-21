@@ -7,7 +7,7 @@ Currently ideas only; i.e, incomplete.
 
 Uses Python 2.7 (because of the dependency on scrapy).
 
-You probably want to sandbox the runtime by [making sure virtualenvwrapper is installed](http://docs.python-guide.org/en/latest/dev/virtualenvs/), then:
+You probably want to sandbox the runtime by [installing pip](http://pip.readthedocs.org/en/stable/installing) and [installing virtualenvwrapper](http://docs.python-guide.org/en/latest/dev/virtualenvs/), then:
 
 ```
 $ mkvirtualenv sgfspider
